@@ -7,6 +7,7 @@ export interface InvoiceDoc extends Document {
   items: { name: string; qty: number; price: number }[];
   total: number;
   status: "draft" | "pending" | "paid" | "overdue";
+  userId: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -24,7 +25,8 @@ const InvoiceSchema = new Schema<InvoiceDoc>(
       },
     ],
     total: Number,
-    status: { type: String, enum: ["draft", "pending", "paid", "overdue"], default: "draft" },
+    status: { type: String, enum: ["draft","pending","paid","overdue"], default: "draft" },
+    userId: { type: String, required: true },
   },
   { timestamps: true }
 );

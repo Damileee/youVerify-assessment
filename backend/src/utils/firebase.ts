@@ -1,5 +1,9 @@
 import admin from "firebase-admin";
+import dotenv from "dotenv";
 
+dotenv.config();
+
+// Initialize Firebase Admin SDK
 admin.initializeApp({
   credential: admin.credential.cert({
     type: process.env.FIREBASE_TYPE,
@@ -13,3 +17,13 @@ admin.initializeApp({
     clientX509CertUrl: process.env.FIREBASE_CLIENT_X509_CERT_URL,
   } as any),
 });
+
+export const verifyFirebaseToken = async (
+  token: string
+): Promise<admin.auth.DecodedIdToken> => {
+  try {
+    return await admin.auth().verifyIdToken(token);
+  } catch (err) {
+    throw new Error("Invalid token");
+  }
+};

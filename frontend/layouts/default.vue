@@ -9,7 +9,7 @@
       <HeaderBar title="Invoice" />
 
       <!-- Page content -->
-      <main class="p- flex-1 overflow-auto no-scrollbar">
+      <main class="p- flex-1 overflow-auto no-scrollbar pb-14">
         <slot />
       </main>
     </div>

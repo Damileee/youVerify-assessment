@@ -27,7 +27,9 @@
         <label for="password" class="block text-sm font-medium text-gray-900"
           >Password</label
         >
-        <div class="text-sm font-semibold text-indigo-600 hover:text-indigo-500 cursor-pointer">
+        <div
+          class="text-sm font-semibold text-indigo-600 hover:text-indigo-500 cursor-pointer"
+        >
           Forgot password?
         </div>
       </div>
@@ -59,4 +61,8 @@ const form = reactive({
 async function login() {
   await signInSWR.action(form);
 }
+
+definePageMeta({
+  layout: false,
+});
 </script>

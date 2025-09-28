@@ -54,4 +54,8 @@ const form = reactive({
 async function signup() {
   await signUpSWR.action(form);
 }
+
+definePageMeta({
+  layout: false,
+});
 </script>

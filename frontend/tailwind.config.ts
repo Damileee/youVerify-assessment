@@ -9,7 +9,11 @@ const config: Config = {
     "./presets/**/*.{js,vue,ts}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ["Inter", "sans-serif"],
+      },
+    },
   },
   plugins: [],
 };

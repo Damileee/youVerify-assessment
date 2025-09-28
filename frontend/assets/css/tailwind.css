@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.btn-base {
+  @apply transition-colors rounded-full bg-white border border-[#E3E6EF] text-[#697598] font-medium text-sm lg:text-base hover:font-semibold hover:bg-[#003EFF] hover:text-white;
+}
+
+.btn-primary {
+  @apply btn-base !text-[#003EFF] hover:!text-white;
+}
+
+/* Hide scrollbars but preserve scroll functionality */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}

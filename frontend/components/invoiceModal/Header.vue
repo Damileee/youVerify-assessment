@@ -29,12 +29,42 @@
         SEND INVOICE
       </button>
 
-      <div class="hidden sm:block relative">
+      <!-- More Dropdown -->
+      <div ref="dropdownRef" class="hidden sm:block relative">
         <button
+          @click="toggleDropdown"
           class="rounded-full border border-[#E3E6EF] px-4 py-3 lg:text-base text-sm font-medium text-[#373B47] hover:bg-gray-50"
         >
           More
         </button>
+
+        <!-- Dropdown menu -->
+        <transition
+          enter-active-class="transition ease-out duration-200"
+          enter-from-class="opacity-0 translate-y-1"
+          enter-to-class="opacity-100 translate-y-0"
+          leave-active-class="transition ease-in duration-150"
+          leave-from-class="opacity-100 translate-y-0"
+          leave-to-class="opacity-0 translate-y-1"
+        >
+          <div
+            v-if="isOpen"
+            class="absolute right-0 mt-2 w-[242px] rounded-3xl border border-[#E3E6EF] bg-white shadow-lg p-4"
+          >
+            <button
+              @click="duplicateInvoice"
+              class="block w-full text-left px-4 py-3 text-sm font-medium text-[#697598] hover:bg-gray-100"
+            >
+              Duplicate Invoice
+            </button>
+            <button
+              @click="getSharableLink"
+              class="block w-full text-left px-4 py-3 text-sm font-medium text-[#697598] hover:bg-gray-100"
+            >
+              Get Sharable Link
+            </button>
+          </div>
+        </transition>
       </div>
 
       <!-- Mobile close -->
@@ -49,10 +79,42 @@
 </template>
 
 <script setup lang="ts">
-import type { InvoiceData } from "~/types/invoice";
+import { ref, onMounted, onBeforeUnmount } from "vue"
+import type { InvoiceData } from "~/types/invoice"
 
 defineProps<{
-  invoice: InvoiceData;
-  onClose: () => void;
-}>();
+  invoice: InvoiceData
+  onClose: () => void
+}>()
+
+const isOpen = ref(false)
+const dropdownRef = ref<HTMLElement | null>(null)
+
+function toggleDropdown() {
+  isOpen.value = !isOpen.value
+}
+
+function duplicateInvoice() {
+  console.log("Duplicate invoice clicked")
+  isOpen.value = false
+}
+
+function getSharableLink() {
+  console.log("Sharable link clicked")
+  isOpen.value = false
+}
+
+function handleClickOutside(e: MouseEvent) {
+  if (dropdownRef.value && !dropdownRef.value.contains(e.target as Node)) {
+    isOpen.value = false
+  }
+}
+
+onMounted(() => {
+  document.addEventListener("click", handleClickOutside)
+})
+
+onBeforeUnmount(() => {
+  document.removeEventListener("click", handleClickOutside)
+})
 </script>

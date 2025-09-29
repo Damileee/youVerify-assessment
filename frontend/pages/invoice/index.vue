@@ -103,25 +103,25 @@ const statsCards: StatsCardData[] = [
   {
     title: "Total Paid",
     value: 4120102.76,
-    count: 10,
+    count: 1289,
     status: InvoiceStatus.PAID,
   },
   {
     title: "Total Overdue",
     value: 23000.13,
-    count: 0,
+    count: 13,
     status: InvoiceStatus.OVERDUE,
   },
   {
     title: "Total Draft",
     value: 12200.0,
-    count: 0,
+    count: 8,
     status: InvoiceStatus.DRAFT,
   },
   {
     title: "Total Unpaid",
     value: 87102.0,
-    count: 0,
+    count: 6,
     status: InvoiceStatus.UNPAID,
   },
 ];

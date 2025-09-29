@@ -1,12 +1,12 @@
-import { auth } from "~/utils/firebase";
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
 
 export const signInFirebase = async (email: string, password: string) => {
+  const { $auth } = useNuxtApp()
   const userCredential = await signInWithEmailAndPassword(
-    auth,
+    $auth,
     email,
     password,
   );
@@ -15,8 +15,9 @@ export const signInFirebase = async (email: string, password: string) => {
 };
 
 export const signUpFirebase = async (email: string, password: string) => {
+  const { $auth } = useNuxtApp()
   const userCredential = await createUserWithEmailAndPassword(
-    auth,
+    $auth,
     email,
     password,
   );

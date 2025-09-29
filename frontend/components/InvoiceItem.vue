@@ -1,6 +1,7 @@
 <template>
   <div
-    class="flex items-center justify-between px-3 max-sm:px-1 lg:px-6 pt-4 pb-[25px]"
+    class="flex items-center justify-between px-3 max-sm:px-1 lg:px-6 pt-4 pb-[25px] cursor-pointer"
+    @click="$emit('select', id)"
   >
     <div class="font-medium text-sm text-[#373B47] flex flex-col gap-1">
       <p>Invoice -</p>
@@ -35,6 +36,7 @@ defineProps<{
   amount: number;
   status: InvoiceStatus;
 }>();
+defineEmits(['select']);
 
 const statusClasses: Record<InvoiceStatus, string> = {
   [InvoiceStatus.PAID]: "text-[#129043] bg-[#E6FFF0] border-[#12904333]",

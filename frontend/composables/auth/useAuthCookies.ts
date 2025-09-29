@@ -11,8 +11,15 @@ export function useAuthCookies() {
     secure: import.meta.env.PROD,
   });
 
+  const logout = () => {
+    token.value = null
+    email.value = null
+    return navigateTo("/auth/login")
+  }
+
   return {
     token,
     email,
+    logout
   };
 }

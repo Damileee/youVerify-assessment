@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-6">
+  <div :class="[props.variant === ActivityVariant.TIMELINE ? '' : 'space-y-6']">
     <div
       v-for="(activity, index) in props.activities"
       :key="activity.id"
@@ -7,19 +7,26 @@
     >
       <!-- Avatar -->
       <div class="flex flex-col items-center">
-        <component :is="activity.avatar" class="w-12 h-12 rounded-full" />
+        <div>
+          <component :is="activity.avatar" class="w-12 h-12 rounded-full" />
+        </div>
         <!-- Line (only for timeline variant) -->
         <div
           v-if="
             props.variant === ActivityVariant.TIMELINE &&
             index !== props.activities.length - 1
           "
-          class="mt-2 h-full w-px bg-gray-200"
+          class="mt-2 h-full w-px bg-[#E3E6EF]"
         />
       </div>
 
       <!-- Content -->
-      <div class="flex-1">
+      <div
+        :class="[
+          'flex-1',
+          props.variant === ActivityVariant.TIMELINE ? 'pb-6' : '',
+        ]"
+      >
         <h3 class="font-medium text-black text-lg">
           {{ activity.title ?? activity.user }}
         </h3>

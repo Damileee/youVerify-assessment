@@ -4,7 +4,7 @@
     <CommonSidebar :isOpen="isSidebarOpen" @close="isSidebarOpen = false" />
 
     <!-- Main content -->
-    <div class="flex-1 flex flex-col lg:mx-10">
+    <div class="flex-1 flex flex-col mx-4 lg:mx-10">
       <!-- Header -->
       <HeaderBar title="Invoice" />
 

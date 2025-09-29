@@ -1,30 +1,30 @@
 import { signUpFirebase } from "@/services/auth.service";
-import { useRouter } from "vue-router";
 import { useSWR } from "@/composables/common/useSWR";
 import type { authPayload } from "~/models/requests/auth";
 import { useErrorHandler } from "../common/useErrorHandler";
 import { useToast } from "vue-toastification";
+import { useAuthCookies } from "./useAuthCookies";
 
 export function useSignUp() {
-  const router = useRouter();
   const toast = useToast();
+  const { token, email } = useAuthCookies();
 
   const { data, error, loading, action } = useSWR(
     async (payload: authPayload) => {
-      const { token, email } = await signUpFirebase(
+      const { token: firebaseToken, email: firebaseEmail } = await signUpFirebase(
         payload.email,
         payload.password,
       );
-      // Store token and user email in sessionStorage
-      sessionStorage.setItem("firebaseToken", token);
-      sessionStorage.setItem("firebaseEmail", email || "");
+      // store token in cookies
+      token.value = firebaseToken;
+      email.value = firebaseEmail
       return { token, email };
     },
     {
       autoExecute: false,
-      onSuccess: ({ token, email }) => {
+      onSuccess: () => {
         toast.success("Account created successfully!");
-        router.push("/");
+        navigateTo("/invoice");
       },
       onError: (error: any) => {
         useErrorHandler(error);

@@ -28,15 +28,18 @@
 </template>
 
 <script setup lang="ts">
+import { useAuthCookies } from '~/composables/auth';
 // Define component props
 const props = defineProps<{
   title: string;
 }>();
+
 // user initials from session storage
+const { email } = useAuthCookies();
 const userInitials: Ref<string> = ref("");
 
 // on mounted, get user initials from session storage
 onMounted(() => {
-  userInitials.value = sessionStorage.getItem("firebaseEmail") || "";
+  userInitials.value = email.value || '';
 });
 </script>

@@ -20,6 +20,7 @@
           <InvoiceItem
             v-for="(invoice, iIndex) in group.invoices"
             :key="iIndex"
+            @select="handleSelect"
             v-bind="invoice"
           />
         </div>
@@ -37,8 +38,16 @@ const props = defineProps<{
     invoices: Invoice[];
   }[];
 }>();
+const emit = defineEmits<{
+  (e: 'selectedInvoice', id: string): void;
+}>();
 
 const handleViewAll = () => {
   console.log("View all invoices clicked");
 };
+
+// Function to handle invoice selection
+function handleSelect(id: string) {
+  emit('selectedInvoice', id);
+}
 </script>

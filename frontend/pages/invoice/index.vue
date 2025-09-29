@@ -23,7 +23,7 @@
         :key="card.title"
         :title="card.title"
         :count="card.count || 0"
-        :value="card.value"
+        :value="card.value || 0"
         :status="card.status"
       />
     </section>
@@ -48,7 +48,7 @@
     </section>
 
     <section class="mt-6 flex gap-8 flex-col xl:flex-row">
-      <RecentInvoices :invoiceGroups class="" />
+      <RecentInvoices :invoiceGroups @selectedInvoice="openInvoiceDetailsModal" class="" />
       <ContainerInvoice
         title="Recent Activities"
         buttonLabel="View All"
@@ -65,6 +65,13 @@
         />
       </ContainerInvoice>
     </section>
+
+    <InvoiceModal
+      :isOpen="isOpen"
+      :onClose="() => (isOpen = false)"
+      :invoice="invoice"
+      :activities
+    />
   </main>
 </template>
 
@@ -77,11 +84,20 @@ import {
 } from "#components";
 import {
   InvoiceStatus,
+  ModalInvoiceStatus,
+  type InvoiceData,
   type InvoiceGroup,
   type StatsCardData,
   type InvoiceActionCardData,
 } from "@/types/invoice";
 import { ActivityVariant, type ActivityItem } from "~/types/activity";
+
+const isOpen = ref(false);
+
+function openInvoiceDetailsModal(id: string) {
+  console.log("Selected Invoice ID:", id);
+  isOpen.value = true;
+}
 
 const statsCards: StatsCardData[] = [
   {
@@ -201,6 +217,47 @@ const activities: ActivityItem[] = [
     description: "Created invoice <b>00239434/Olaniyi Ojo Adewale</b>",
   },
 ];
+
+const invoice: InvoiceData = {
+  id: '1023902390',
+  number: '1023494-2304',
+  status: ModalInvoiceStatus.PARTIAL,
+  issueDate: 'March 30th, 2023',
+  dueDate: 'May 19th, 2023',
+  currency: '$',
+  sender: {
+    name: 'Fabulous Enterprise',
+    email: 'info@fabulousenterise.co',
+    phone: '+386 989 271 3115',
+    address: '133 Hart Ridge Road, 45436 Gaines, MI',
+  },
+  customer: {
+    name: 'Olaniyi Ojo Adewale',
+    email: 'info@customeremail.com',
+    phone: '+386 989 271 3115',
+  },
+  items: [
+    { id: '1', title: 'Email Marketing', description: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium', quantity: 10, rate: 1500, amount: 15000 },
+    { id: '2', title: 'Video looping effect', description: '', quantity: 6, rate: 110500, amount: 6663000 },
+    { id: '3', title: 'Graphic design for emails', description: 'Tsit voluptatem accusantium', quantity: 7, rate: 2750, amount: 19250 },
+    { id: '4', title: 'Video looping effect', description: '', quantity: 6, rate: 110500, amount: 6663000 },
+  ],
+  subtotal: 6697200,
+  discount: 167430,
+  total: 6529770,
+  note: 'Thank you for your patronage',
+}
+
+const Modalactivities: ActivityItem[] = [
+  {
+    id: '1',
+    user: 'You',
+    avatar: IconsAvatar,
+    title: 'Created',
+    timestamp: 'Today, 12:20 PM',
+    description: 'Created invoice <b>00239434/Olaniyi Ojo Adewale</b>',
+  },
+]
 
 definePageMeta({
   layout: "default",

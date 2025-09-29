@@ -11,7 +11,7 @@
         </p>
         <div
           :class="[
-            'py-3 px-4 rounded-3xl text-sm font-medium text-[#373B47]',
+            'py-2 px-4 rounded-3xl text-sm font-medium text-[#373B47]',
             status === InvoiceStatus.PAID
               ? 'bg-[#B6FDD3]'
               : status === InvoiceStatus.OVERDUE
@@ -21,7 +21,7 @@
                   : 'bg-[#F8E39B]',
           ]"
         >
-          {{ count }}
+          {{ count.toLocaleString() }}
         </div>
       </div>
 

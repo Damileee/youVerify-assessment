@@ -74,7 +74,7 @@ interface SidebarLink {
 }
 
 const sidebarLinks: SidebarLink[] = [
-  { title: "Getting Started", icon: IconsHome, to: "/" },
+  { title: "Getting Started", icon: IconsHome, to: "#" },
   { title: "Overview", icon: IconsOverview, to: "#" },
   { title: "Accounts", icon: IconsHome, to: "#" },
   { title: "Invoice", icon: IconsInvoice, to: "/invoice" },

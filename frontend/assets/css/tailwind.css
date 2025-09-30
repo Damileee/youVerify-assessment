@@ -18,3 +18,12 @@
 .no-scrollbar::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
 }
+
+/* Loader */
+.loader-spinner {
+  @apply animate-spin rounded-full border-4 border-t-4 border-gray-200;
+  display: inline-block;
+  height: 3rem;
+  width: 3rem;
+  border-top-color: var(--primary-dark);
+}

@@ -29,6 +29,7 @@
 
 <script setup lang="ts">
 import { InvoiceStatus } from "@/types/invoice";
+import { formatNumber } from "@/utils/formatNumber";
 
 defineProps<{
   id: string;
@@ -36,7 +37,7 @@ defineProps<{
   amount: number;
   status: InvoiceStatus;
 }>();
-defineEmits(['select']);
+defineEmits(["select"]);
 
 const statusClasses: Record<InvoiceStatus, string> = {
   [InvoiceStatus.PAID]: "text-[#129043] bg-[#E6FFF0] border-[#12904333]",

@@ -22,16 +22,25 @@
       <div
         class="relative md:p-10 p-6 w-full h-full md:h-auto md:max-h-[90vh] md:max-w-[1334px] md:rounded-[30px] bg-white shadow-xl overflow-hidden"
       >
-        <InvoiceModalHeader :invoice="invoice" :onClose="onClose" />
+        <InvoiceModalHeader
+          :invoice="invoice"
+          :onClose="onClose"
+          @duplicate="emit('duplicate')"
+        />
 
         <div class="h-full !overflow-y-auto no-scrollbar pb-32">
           <InvoiceModalReminders />
 
           <div class="flex flex-col xl:flex-row md:gap-6 xl:gap-14">
             <!-- Main -->
-            <main class="flex-1 md:border md:border-[#E3E6EF] md:rounded-[30px] md:p-6">
+            <main
+              class="flex-1 md:border md:border-[#E3E6EF] md:rounded-[30px] md:p-6"
+            >
               <InvoiceModalDetails :invoice="invoice" />
-              <InvoiceModalItems :items="invoice.items" :currency="invoice.currency" />
+              <InvoiceModalItems
+                :items="invoice.items"
+                :currency="invoice.currency"
+              />
               <InvoiceModalTotals :invoice="invoice" />
               <InvoiceModalPaymentInfo :invoice="invoice" />
               <InvoiceModalNote v-if="invoice.note" :note="invoice.note" />
@@ -57,6 +66,10 @@ const props = defineProps<{
   onClose: () => void;
   invoice: InvoiceData;
   activities: ActivityItem[];
+}>();
+
+const emit = defineEmits<{
+  (e: "duplicate"): void;
 }>();
 
 // ---- Helpers: scroll lock & ESC close ----
@@ -87,7 +100,7 @@ watch(
       window.removeEventListener("keydown", onKeydown);
     }
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 onBeforeUnmount(() => {

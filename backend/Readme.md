@@ -180,3 +180,4 @@ backend/
 ## Author
 
 **Damilare Olasoju**
+**Email: olasojudamilare6@gmail.com**

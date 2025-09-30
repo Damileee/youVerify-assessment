@@ -54,7 +54,6 @@ export const seedRecentInvoices = async (userId: string) => {
     ];
 
     await RecentInvoice.insertMany(invoices);
-    console.log("✅ Recent invoices seeded successfully");
   } catch (error) {
     console.error("❌ Error seeding recent invoices", error);
   }

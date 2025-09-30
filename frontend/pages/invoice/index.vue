@@ -188,7 +188,6 @@ async function handleDuplicate() {
 
 //Define helper functions
 function openInvoiceDetailsModal(id: string) {
-  console.log("Selected Invoice ID:", id);
   isOpen.value = true;
 }
 

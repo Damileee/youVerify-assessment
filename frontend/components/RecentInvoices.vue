@@ -43,7 +43,7 @@ const emit = defineEmits<{
 }>();
 
 const handleViewAll = () => {
-  console.log("View all invoices clicked");
+  // console.log("View all invoices clicked");
 };
 
 // Function to handle invoice selection

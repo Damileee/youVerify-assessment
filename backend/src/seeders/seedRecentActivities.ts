@@ -37,7 +37,6 @@ export const seedRecentActivities = async ( userId: string ) => {
     ];
 
     await RecentActivity.insertMany(activities);
-    console.log("✅ Recent activities (list) seeded successfully");
   } catch (err) {
     console.error("❌ Error seeding recent activities:", err);
   }

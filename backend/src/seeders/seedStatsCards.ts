@@ -39,7 +39,6 @@ export const seedStatsCards = async (userId: string) => {
     ];
 
     await StatsCard.insertMany(statsCards);
-    console.log(`✅ Stats cards seeded successfully for user: ${userId}`);
   } catch (error) {
     console.error("❌ Error seeding stats cards:", error);
   }

@@ -59,7 +59,7 @@ router.get("/", async (req: any, res) => {
     const existingStats = await StatsCard.findOne({ userId });
 
     if (!existingStats) {
-      console.log("🌱 Seeding demo data for user:", userId);
+      // console.log("🌱 Seeding demo data for user:", userId);
 
       await seedStatsCards(userId);
       await seedRecentActivities(userId);

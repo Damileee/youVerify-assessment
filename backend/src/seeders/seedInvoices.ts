@@ -1,4 +1,5 @@
 import { Invoice } from "../models/Invoice.js";
+import { nanoid } from 'nanoid';
 
 export const seedInvoices = async ( userId: string ) => {
   try {
@@ -6,7 +7,7 @@ export const seedInvoices = async ( userId: string ) => {
 
     const invoices = [
       {
-        id: "1023902390",
+        id: nanoid(),
         number: "1023494-2304",
         status: "partial",
         issueDate: "March 30th, 2023",
@@ -25,7 +26,7 @@ export const seedInvoices = async ( userId: string ) => {
         },
         items: [
           {
-            id: "1",
+            id: nanoid(),
             title: "Email Marketing",
             description:
               "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium",
@@ -34,7 +35,7 @@ export const seedInvoices = async ( userId: string ) => {
             amount: 15000,
           },
           {
-            id: "2",
+            id: nanoid(),
             title: "Video looping effect",
             description: "",
             quantity: 6,
@@ -42,7 +43,7 @@ export const seedInvoices = async ( userId: string ) => {
             amount: 6663000,
           },
           {
-            id: "3",
+            id: nanoid(),
             title: "Graphic design for emails",
             description: "Tsit voluptatem accusantium",
             quantity: 7,
@@ -50,7 +51,7 @@ export const seedInvoices = async ( userId: string ) => {
             amount: 19250,
           },
           {
-            id: "4",
+            id: nanoid(),
             title: "Video looping effect",
             description: "",
             quantity: 6,

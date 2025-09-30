@@ -1,4 +1,5 @@
 import { RecentActivity } from "../models/RecentActivity.js";
+import { nanoid } from 'nanoid';
 
 export const seedRecentActivities = async ( userId: string ) => {
   try {
@@ -7,28 +8,28 @@ export const seedRecentActivities = async ( userId: string ) => {
 
     const activities = [
       {
-        id: "1",
+        id: nanoid(),
         title: "Invoice creation",
         timestamp: "Yesterday, 12:05 PM",
         description: "Created invoice <b>00239434/Olaniyi Ojo Adewale</b>",
         userId,
       },
       {
-        id: "2",
+        id: nanoid(),
         title: "Invoice creation",
         timestamp: "Yesterday, 12:05 PM",
         description: "Created invoice <b>00239434/Olaniyi Ojo Adewale</b>",
         userId,
       },
       {
-        id: "3",
+        id: nanoid(),
         title: "Invoice creation",
         timestamp: "Yesterday, 12:05 PM",
         description: "Created invoice <b>00239434/Olaniyi Ojo Adewale</b>",
         userId,
       },
       {
-        id: "4",
+        id: nanoid(),
         title: "Invoice creation",
         timestamp: "Yesterday, 12:05 PM",
         description: "Created invoice <b>00239434/Olaniyi Ojo Adewale</b>",

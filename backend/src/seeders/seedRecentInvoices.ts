@@ -1,5 +1,5 @@
 import { RecentInvoice } from "../models/RecentInvoice.js";
-
+import { nanoid } from 'nanoid';
 
 export const seedRecentInvoices = async (userId: string) => {
   try {
@@ -7,7 +7,7 @@ export const seedRecentInvoices = async (userId: string) => {
 
     const invoices = [
       {
-        id: "1",
+        id: nanoid(),
         number: "1023494 - 2304",
         dueDate: new Date("2023-05-19"),
         amount: 1311750.12,
@@ -16,7 +16,7 @@ export const seedRecentInvoices = async (userId: string) => {
         userId,
       },
       {
-        id: "2",
+        id: nanoid(),
         number: "1023494 - 2304",
         dueDate: new Date("2023-05-19"),
         amount: 1311750.12,
@@ -25,7 +25,7 @@ export const seedRecentInvoices = async (userId: string) => {
         userId,
       },
       {
-        id: "3",
+        id: nanoid(),
         number: "1023494 - 2304",
         dueDate: new Date("2023-05-19"),
         amount: 1311750.12,
@@ -34,7 +34,7 @@ export const seedRecentInvoices = async (userId: string) => {
         userId,
       },
       {
-        id: "4",
+        id: nanoid(),
         number: "1023494 - 2304",
         dueDate: new Date("2023-05-19"),
         amount: 1311750.12,
@@ -43,7 +43,7 @@ export const seedRecentInvoices = async (userId: string) => {
         userId,
       },
       {
-        id: "5",
+        id: nanoid(),
         number: "1023494 - 2304",
         dueDate: new Date("2023-05-19"),
         amount: 1311750.12,

@@ -11,7 +11,7 @@ This is the frontend for the **Invoice App** assessment project. It is built usi
 	•	View recent activities associated with actions like invoice duplication.
 	•	See their profile initials in the profile bar and log out.
 
-⸻
+
 
 ## Features
 	•	User Authentication
@@ -29,7 +29,7 @@ This is the frontend for the **Invoice App** assessment project. It is built usi
 	•	Testing
 	•	Unit and integration tests using Vitest and @vue/test-utils.
 
-⸻
+
 
 ### Installation
 
@@ -48,11 +48,11 @@ npm install
 
 3. Create a `.env` file in `frontend/`:
 
+```
 NUXT_PUBLIC_API_BASE_URL=https://your-backend-url/api
 NUXT_PUBLIC_LOCALHOST_API_BASE_URL=http://localhost:4000/api
+```
 
-
-⸻
 
 ## Running the App
 
@@ -71,8 +71,6 @@ npm run build
 npm run preview
 ```
 
-⸻
-
 ## Testing
 
 Run all tests:
@@ -83,9 +81,8 @@ npm run test
 
 **Tests cover critical components and UI behavior.**
 
-⸻
 
-Real-time Invoice Duplication Flow
+## Real-time Invoice Duplication Flow
 	1.	Open an invoice modal.
 	2.	Click the “More” button on an invoice.
 	3.	Select Duplicate from the dropdown.
@@ -95,16 +92,15 @@ Real-time Invoice Duplication Flow
 	•	Recent invoices update to include the duplicated invoice, grouped under the date it was duplicated.
 	•	Recent activities list updates to show the action carried out.
 
-⸻
 
-Profile & Logout
+## Profile & Logout
 	•	Profile bar shows user initials.
 	•	Click on the profile bar to log out.
 
-⸻
 
 ## Project Structure
 
+```
 frontend/
 ├─ components/       # Reusable Vue components
 ├─ pages/            # Nuxt pages
@@ -115,9 +111,8 @@ frontend/
 ├─ nuxt.config.ts    # Nuxt configuration
 ├─ package.json      # NPM dependencies & scripts
 └─ README.md
+```
 
-
-⸻
 
 ## Notes
 	•	Ensure the backend API URL (NUXT_PUBLIC_API_BASE_URL) is accessible.

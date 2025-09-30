@@ -20,6 +20,7 @@
                   ? 'bg-[#D9D9E0]'
                   : 'bg-[#F8E39B]',
           ]"
+          data-testid="status-count"
         >
           {{ count.toLocaleString() }}
         </div>
@@ -39,6 +40,8 @@
 </template>
 
 <script setup lang="ts">
+import IconsOverview from "./icons/Overview.vue";
+import { computed } from "vue";
 import { InvoiceStatus } from "@/types/invoice";
 
 interface Props {

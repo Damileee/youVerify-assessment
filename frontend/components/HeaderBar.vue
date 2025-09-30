@@ -14,7 +14,7 @@
       </button>
 
       <!-- User Avatar / Initials -->
-      <div class="flex items-center cursor-pointer bg-white p-3 rounded-full">
+      <div @click="logout" class="flex items-center cursor-pointer bg-white p-3 rounded-full">
         <div
           class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold"
         >
@@ -35,7 +35,7 @@ const props = defineProps<{
 }>();
 
 // user initials from session storage
-const { email } = useAuthCookies();
+const { email, logout } = useAuthCookies();
 const userInitials: Ref<string> = ref("");
 
 // on mounted, get user initials from session storage

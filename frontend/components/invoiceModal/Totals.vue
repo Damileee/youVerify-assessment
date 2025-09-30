@@ -29,8 +29,4 @@
 import type { InvoiceData } from "~/types/invoice";
 
 defineProps<{ invoice: InvoiceData }>();
-
-function formatNumber(value: number) {
-  return value.toLocaleString();
-}
 </script>

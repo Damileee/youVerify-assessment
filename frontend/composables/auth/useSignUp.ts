@@ -2,11 +2,10 @@ import { signUpFirebase } from "@/services/auth.service";
 import { useSWR } from "@/composables/common/useSWR";
 import type { authPayload } from "~/models/requests/auth";
 import { useErrorHandler } from "../common/useErrorHandler";
-import { useToast } from "vue-toastification";
 import { useAuthCookies } from "./useAuthCookies";
 
 export function useSignUp() {
-  const toast = useToast();
+  const { $toast } = useNuxtApp();
   const { token, email } = useAuthCookies();
 
   const { data, error, loading, action } = useSWR(
@@ -21,6 +20,7 @@ export function useSignUp() {
     {
       autoExecute: false,
       onSuccess: () => {
+        const toast = $toast();
         toast.success("Account created successfully!");
         navigateTo("/invoice");
       },

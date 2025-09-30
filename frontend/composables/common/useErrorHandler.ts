@@ -1,7 +1,6 @@
-import { useToast } from "vue-toastification";
-
 export function useErrorHandler(error: any) {
-  const toast = useToast();
+  const { $toast } = useNuxtApp();
+  const toast = $toast();
   if (!error) return;
 
   // 1. Network errors

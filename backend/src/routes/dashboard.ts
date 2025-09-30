@@ -56,9 +56,15 @@ router.get("/", async (req: any, res) => {
     const userId = req.user.uid;
 
     // Check if this user already has data
-    const existingStats = await StatsCard.findOne({ userId });
+    const [existingStats, existingActivities, existingRecentInvoices, existingInvoices] = await Promise.all([
+      StatsCard.findOne({ userId }),
+      RecentActivity.findOne({ userId }),
+      RecentInvoice.findOne({ userId }),
+      Invoice.findOne({ userId }),
+    ]);
 
-    if (!existingStats) {
+    // If at least one is missing, seed all
+    if (!existingStats || !existingActivities || !existingRecentInvoices || !existingInvoices) {
       // console.log("🌱 Seeding demo data for user:", userId);
 
       await seedStatsCards(userId);
@@ -68,7 +74,7 @@ router.get("/", async (req: any, res) => {
     }
 
     // Always fetch and return dashboard data
-    const [statsCards,invoices, recentInvoices, recentActivities] = await Promise.all([
+    const [statsCards, invoices, recentInvoices, recentActivities] = await Promise.all([
       StatsCard.find({ userId }).lean(),
       Invoice.findOne({ userId }).lean(),
       RecentInvoice.find({ userId }).sort({ createdAt: -1 }).limit(5).lean(),

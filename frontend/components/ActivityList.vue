@@ -8,7 +8,7 @@
       <!-- Avatar -->
       <div class="flex flex-col items-center">
         <div>
-          <component :is="activity.avatar" class="w-12 h-12 rounded-full" />
+          <IconsAvatar class="w-12 h-12 rounded-full" />
         </div>
         <!-- Line (only for timeline variant) -->
         <div
@@ -17,6 +17,7 @@
             index !== props.activities.length - 1
           "
           class="mt-2 h-full w-px bg-[#E3E6EF]"
+          data-testid="timeline-line"
         />
       </div>
 
@@ -28,7 +29,7 @@
         ]"
       >
         <h3 class="font-medium text-black text-lg">
-          {{ activity.title ?? activity.user }}
+          {{ activity.title || activity.user }}
         </h3>
         <p class="text-sm text-[#697598] font-normal">
           {{ activity.timestamp }}
@@ -45,6 +46,7 @@
 </template>
 
 <script setup lang="ts">
+import IconsAvatar from "./icons/Avatar.vue";
 import type { ActivityItem } from "~/types/activity";
 import { ActivityVariant } from "~/types/activity";
 

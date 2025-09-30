@@ -12,14 +12,14 @@ export function useAuthCookies() {
   });
 
   const logout = () => {
-    token.value = null
-    email.value = null
-    return navigateTo("/auth/login")
-  }
+    token.value = null;
+    email.value = null;
+    return navigateTo("/auth/login");
+  };
 
   return {
     token,
     email,
-    logout
+    logout,
   };
 }

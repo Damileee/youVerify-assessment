@@ -6,7 +6,7 @@ export enum ActivityVariant {
 export interface ActivityItem {
   id: string;
   user?: string;
-  avatar: any;
+  avatar?: any;
   title?: string;
   timestamp: string;
   description: string;

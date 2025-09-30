@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useRouter } from "vue-router";
+import { useAuthCookies } from "~/composables/auth";
 
 export default defineNuxtPlugin((nuxtApp) => {
   const router = useRouter();
   const config = useRuntimeConfig();
+  const { token, logout } = useAuthCookies();
 
   const apiClient = axios.create({
     baseURL: config.public.apiBaseUrl as string,
@@ -12,9 +14,8 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   // Attach token from sessionStorage
   apiClient.interceptors.request.use((config) => {
-    const token = sessionStorage.getItem("firebaseToken");
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+    if (token.value) {
+      config.headers.Authorization = `Bearer ${token.value}`;
     }
     return config;
   });
@@ -24,8 +25,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     (response) => response,
     (error) => {
       if (error.response?.status === 401) {
-        sessionStorage.removeItem("firebaseToken");
-        router.push("/auth/signin");
+        logout();
       }
       return Promise.reject(error);
     },

@@ -11,13 +11,11 @@ export function useSignUp() {
 
   const { data, error, loading, action } = useSWR(
     async (payload: authPayload) => {
-      const { token: firebaseToken, email: firebaseEmail } = await signUpFirebase(
-        payload.email,
-        payload.password,
-      );
+      const { token: firebaseToken, email: firebaseEmail } =
+        await signUpFirebase(payload.email, payload.password);
       // store token in cookies
       token.value = firebaseToken;
-      email.value = firebaseEmail
+      email.value = firebaseEmail;
       return { token, email };
     },
     {

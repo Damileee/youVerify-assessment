@@ -39,7 +39,7 @@ const props = defineProps<{
   }[];
 }>();
 const emit = defineEmits<{
-  (e: 'selectedInvoice', id: string): void;
+  (e: "selectedInvoice", id: string): void;
 }>();
 
 const handleViewAll = () => {
@@ -48,6 +48,6 @@ const handleViewAll = () => {
 
 // Function to handle invoice selection
 function handleSelect(id: string) {
-  emit('selectedInvoice', id);
+  emit("selectedInvoice", id);
 }
 </script>

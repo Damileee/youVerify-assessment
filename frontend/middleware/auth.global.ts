@@ -8,7 +8,7 @@ export default defineNuxtRouteMiddleware((to) => {
   }
 
   if (authCookie.value && to.path === "/") {
-    return navigateTo("/invoice")
+    return navigateTo("/invoice");
   }
 
   // If not logged in and trying to access private routes → redirect to login

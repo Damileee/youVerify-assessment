@@ -1,10 +1,10 @@
 // plugins/firebase.client.ts
-import { defineNuxtPlugin, useRuntimeConfig } from '#app'
-import { initializeApp } from 'firebase/app'
-import { getAuth } from 'firebase/auth'
+import { defineNuxtPlugin, useRuntimeConfig } from "#app";
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 
 export default defineNuxtPlugin(() => {
-  const config = useRuntimeConfig()
+  const config = useRuntimeConfig();
 
   const firebaseApp = initializeApp({
     apiKey: config.public.firebaseApiKey,
@@ -14,14 +14,14 @@ export default defineNuxtPlugin(() => {
     messagingSenderId: config.public.firebaseMessagingSenderId,
     appId: config.public.firebaseAppId,
     measurementId: config.public.firebaseMeasurementId,
-  })
+  });
 
-  const auth = getAuth(firebaseApp)
+  const auth = getAuth(firebaseApp);
 
   return {
     provide: {
       firebaseApp,
       auth,
     },
-  }
-})
+  };
+});

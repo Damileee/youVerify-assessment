@@ -7,11 +7,11 @@
           <IconsInvoiceLogo />
           <div class="flex flex-col gap-2">
             <p class="text-base font-medium text-[#1F1F23]">
-              {{ invoice.sender.name }}
+              {{ invoice.sender?.name }}
             </p>
-            <p class="text-xs text-[#697598]">{{ invoice.sender.phone }}</p>
-            <p class="text-xs text-[#697598]">{{ invoice.sender.address }}</p>
-            <p class="text-xs text-[#697598]">{{ invoice.sender.email }}</p>
+            <p class="text-xs text-[#697598]">{{ invoice.sender?.phone }}</p>
+            <p class="text-xs text-[#697598]">{{ invoice.sender?.address }}</p>
+            <p class="text-xs text-[#697598]">{{ invoice.sender?.email }}</p>
           </div>
         </div>
       </div>
@@ -20,11 +20,11 @@
         <h4 class="text-xs font-medium text-[#697598]">CUSTOMER</h4>
         <div class="flex flex-col gap-2 mt-3">
           <p class="text-base font-medium text-[#1F1F23]">
-            {{ invoice.customer.name }}
+            {{ invoice.customer?.name }}
           </p>
-          <p class="text-xs text-[#697598]">{{ invoice.customer.phone }}</p>
-          <p class="text-xs text-[#697598]">{{ invoice.customer.email }}</p>
-          <p class="text-xs text-[#697598]">{{ invoice.customer.address }}</p>
+          <p class="text-xs text-[#697598]">{{ invoice.customer?.phone }}</p>
+          <p class="text-xs text-[#697598]">{{ invoice.customer?.email }}</p>
+          <p class="text-xs text-[#697598]">{{ invoice.customer?.address }}</p>
         </div>
       </div>
     </div>

@@ -12,9 +12,18 @@ export default defineNuxtConfig({
     },
   },
 
+  typescript: {
+    tsConfig: {
+      compilerOptions: {
+        types: ["vitest/globals", "@types/node"],
+      },
+    },
+  },
+
   runtimeConfig: {
     public: {
       apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL,
+      apiUrl: process.env.NUXT_PUBLIC_API_URL,
       firebaseApiKey: process.env.NUXT_PUBLIC_FIREBASE_API_KEY,
       firebaseAuthDomain: process.env.NUXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
       firebaseProjectId: process.env.NUXT_PUBLIC_FIREBASE_PROJECT_ID,
@@ -25,13 +34,11 @@ export default defineNuxtConfig({
       firebaseMeasurementId: process.env.NUXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
     },
   },
+
   app: {
     head: {
       link: [
-        {
-          rel: "preconnect",
-          href: "https://fonts.googleapis.com",
-        },
+        { rel: "preconnect", href: "https://fonts.googleapis.com" },
         {
           rel: "preconnect",
           href: "https://fonts.gstatic.com",

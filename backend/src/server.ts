@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import invoiceRoutes from "./routes/invoices.js";
+import dashboardRoutes from "./routes/dashboard.js";
 import setupSockets from "./sockets/index.js";
 
 dotenv.config();
@@ -29,6 +30,7 @@ app.use((req: any, _, next) => {
 
 // Routes
 app.use("/api/invoices", invoiceRoutes);
+app.use("/api/dashboard", dashboardRoutes);
 
 // Root endpoint
 app.get("/", (req, res) => {

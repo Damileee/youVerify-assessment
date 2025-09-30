@@ -1,6 +1,8 @@
 import { Router } from "express";
-import { Invoice } from "../models/Invoice.js";
+import { RecentInvoice } from '../models/RecentInvoice.js';
+import { RecentActivity } from "../models/RecentActivity.js";
 import { verifyFirebaseToken } from "../utils/firebase.js";
+import { nanoid } from 'nanoid';
 
 const router = Router();
 
@@ -17,72 +19,89 @@ router.use(async (req: any, res, next) => {
   }
 });
 
-// GET all invoices
-router.get("/", async (req: any, res) => {
+// POST /invoices/duplicate
+router.post("/duplicate", async (req: any, res) => {
   try {
-    const invoices = await Invoice.find({ userId: req.user.uid });
-    res.json(invoices);
-  } catch (err) {
-    res.status(500).json({ error: "Failed to fetch invoices" });
-  }
-});
+    // Find the most recent invoice by createdAt, then _id as tiebreaker
+    const recentInvoice = await RecentInvoice.findOne()
+      .sort({ createdAt: -1 });
 
-// GET single invoice
-router.get("/:id", async (req: any, res) => {
-  try {
-    const invoice = await Invoice.findOne({
-      _id: req.params.id,
+    if (!recentInvoice) {
+      return res.status(404).json({ error: "No invoices to duplicate" });
+    }
+
+    // Format today as: "TODAY - 27TH NOVEMBER, 2022"
+    const today = new Date();
+    const day = today.getDate();
+    const daySuffix = (d: number) => {
+      if (d > 3 && d < 21) return "TH";
+      switch (d % 10) {
+        case 1: return "ST";
+        case 2: return "ND";
+        case 3: return "RD";
+        default: return "TH";
+      }
+    };
+    const month = today.toLocaleString("en-US", { month: "long" }).toUpperCase();
+    const year = today.getFullYear();
+    const formattedDateGroup = `TODAY - ${day}${daySuffix(day)} ${month}, ${year}`;
+
+    // Duplicate invoice
+    const duplicatedDate = new Date();
+    const duplicatedInvoice = new RecentInvoice({
+      ...recentInvoice.toObject(),
+      _id: undefined,
+      id: nanoid(),
+      createdAt: today,
+      updatedAt: today,
+      dateGroup: formattedDateGroup,
+    });
+    await duplicatedInvoice.save();
+
+    // Create activity log
+    const recentActivity = await RecentActivity.create({
+      id: duplicatedInvoice._id,
+      title: "Invoice duplicated",
+      timestamp: new Date().toLocaleString("en-US", {
+        weekday: "short",
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
+      description: `Duplicated invoice <b>00239434/Olaniyi Ojo Adewale</b>`,
       userId: req.user.uid,
     });
-    if (!invoice) return res.status(404).json({ error: "Invoice not found" });
-    res.json(invoice);
-  } catch (err) {
-    res.status(400).json({ error: "Invalid invoice ID" });
-  }
-});
 
-// POST create invoice
-router.post("/", async (req: any, res) => {
-  try {
-    const invoice = await Invoice.create({
-      ...req.body,
-      userId: req.user.uid,
+    // Group only the duplicated invoice
+    const groupedInvoice = [
+      {
+        date: formattedDateGroup,
+        invoices: [
+          {
+            id: duplicatedInvoice.number,
+            dueDate: new Date(duplicatedInvoice.dueDate).toLocaleDateString("en-US", {
+              month: "short",
+              day: "numeric",
+              year: "numeric",
+            }),
+            amount: duplicatedInvoice.amount,
+            status: duplicatedInvoice.status,
+          },
+        ],
+      },
+    ];
+
+    // 🔥 Socket events
+    req.io.emit("invoice:duplicated", groupedInvoice);
+    req.io.emit("recentActivity:created", recentActivity);
+
+    res.json({
+      success: true,
+      recentInvoice: groupedInvoice,
+      recentActivity,
     });
-
-    req.io.emit("invoice:created", invoice);
-    res.json(invoice);
   } catch (err) {
-    res.status(400).json({ error: "Failed to create invoice", details: err });
-  }
-});
-
-// PUT update invoice
-router.put("/:id", async (req: any, res) => {
-  try {
-    const updated = await Invoice.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
-    if (!updated) return res.status(404).json({ error: "Invoice not found" });
-
-    req.io.emit("invoice:updated", updated);
-
-    res.json(updated);
-  } catch (err) {
-    res.status(400).json({ error: "Invalid invoice ID" });
-  }
-});
-
-// DELETE invoice
-router.delete("/:id", async (req: any, res) => {
-  try {
-    const deleted = await Invoice.findByIdAndDelete(req.params.id);
-    if (!deleted) return res.status(404).json({ error: "Invoice not found" });
-
-    req.io.emit("invoice:deleted", deleted._id);
-
-    res.json({ success: true, id: deleted._id });
-  } catch (err) {
-    res.status(400).json({ error: "Invalid invoice ID" });
+    console.error(err);
+    res.status(500).json({ error: "Server error" });
   }
 });
 

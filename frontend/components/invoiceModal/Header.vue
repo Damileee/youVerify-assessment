@@ -24,7 +24,7 @@
       </button>
 
       <button
-        class="rounded-full px-6 py-3 lg:text-base text-sm font-medium text-white bg-[#003EFF] hover:bg-blue-700"
+        class="hidden sm:inline-flex rounded-full px-6 py-3 lg:text-base text-sm font-medium text-white bg-[#003EFF] hover:bg-blue-700"
       >
         SEND INVOICE
       </button>

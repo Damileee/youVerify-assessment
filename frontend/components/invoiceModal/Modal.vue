@@ -46,7 +46,7 @@
               <InvoiceModalNote v-if="invoice.note" :note="invoice.note" />
             </main>
 
-            <!-- Sidebar -->
+            <!-- Side -->
             <aside class="w-full xl:w-[449px]">
               <InvoiceModalActivity :activities="activities" />
             </aside>

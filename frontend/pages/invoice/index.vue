@@ -2,7 +2,7 @@
   <main>
     <div
       v-if="isLoading"
-      class="flex items-center justify-center mt-[270px] py-20"
+      class="flex items-center justify-center mt-[100px] lg:mt-[270px] py-20"
     >
       <div class="flex flex-col items-center gap-4 text-center">
         <div

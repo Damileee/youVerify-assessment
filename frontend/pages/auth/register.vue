@@ -3,6 +3,7 @@
     title="Create your account"
     buttonText="Sign up"
     :onSubmit="signup"
+    :loading="signUpSWR.loading.value"
     footerText="Already a member?"
     footerAction="Sign In"
     footerLink="/auth/login"
@@ -51,6 +52,7 @@ const form = reactive({
   password: "",
 });
 
+// Async Function
 async function signup() {
   await signUpSWR.action(form);
 }

@@ -73,9 +73,16 @@ npm install
 Create a `.env` file in `backend/`:
 
 ```env
+DB_URI=mongodb+srv:
 PORT=4000
-MONGO_URI=<your-mongodb-connection-string>
-FIREBASE_SERVICE_ACCOUNT_KEY=<your-firebase-json-key>
+FIREBASE_TYPE=
+FIREBASE_PROJECT_ID=
+FIREBASE_PRIVATE_KEY=
+FIREBASE_CLIENT_ID=
+FIREBASE_AUTH_URI=
+FIREBASE_TOKEN_URI=
+FIREBASE_AUTH_PROVIDER_X509_CERT_URL=
+FIREBASE_CLIENT_X509_CERT_URL=
 ```
 
 4. Start in development mode:

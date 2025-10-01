@@ -48,6 +48,7 @@
 </template>
 
 <script setup lang="ts">
+import AuthForm from "~/components/AuthForm.vue";
 import { useSignIn } from "@/composables/auth";
 
 //Define SWR

@@ -9,7 +9,7 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "format": "prettier --write .",
-    "test": "vitest --config vitest.config.ts --project tsconfig.test.json"
+    "test": "vitest --config vitest.config.ts"
   },
   "dependencies": {
     "axios": "^1.12.2",

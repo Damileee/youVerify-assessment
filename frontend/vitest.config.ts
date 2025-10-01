@@ -7,6 +7,7 @@ export default defineConfig({
   test: {
     globals: true,
     environment: "jsdom",
+    setupFiles: ["./tests/setup.ts"],
   },
   // Point Vitest to the test tsconfig
   esbuild: {
